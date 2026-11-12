@@ -6,7 +6,7 @@
 <title>Magnetismus – Lerngang NT 8</title>
 <!-- Lerngang Magnetismus, Natur und Technik 8, Mittelschule Bayern.
      Eine Datei, keine externen Quellen, keine Datenübertragung.
-     Stand: Phase 2 (Kern-Lerngang R8). Die M-Module sind angelegt, ihre Inhalte folgen in Phase 3. -->
+     Stand: Phase 3 (R8 und M8 mit sieben schaltbaren Modulen). -->
 <style>
 /* ===== Grundfarben und Schrift ===== */
 :root{
@@ -146,7 +146,7 @@ details.anfaenge summary{min-height:48px;display:flex;align-items:center;cursor:
 
 /* ===== Fuß und Dialog ===== */
 .fuss{max-width:920px;margin:1rem auto 2rem;padding:0 1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
-.zahnrad{width:48px;height:48px;border:0;background:transparent;color:#aab2bb;font-size:1.3rem;cursor:pointer;border-radius:24px}
+.zahnrad{width:48px;height:48px;border:0;background:transparent;color:#7d8791;font-size:1.4rem;cursor:pointer;border-radius:24px}
 #overlay{position:fixed;inset:0;z-index:100;background:rgba(20,28,38,.55);display:flex;align-items:flex-start;justify-content:center;
   padding:1rem;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .dialog{background:#fff;border-radius:14px;max-width:680px;width:100%;padding:1rem 1.1rem;margin:auto 0}
@@ -154,7 +154,7 @@ details.anfaenge summary{min-height:48px;display:flex;align-items:center;cursor:
 .dialog-kopf h2{margin:0;font-size:1.3rem}
 .schalter{display:flex;align-items:center;gap:.7rem;min-height:48px;cursor:pointer}
 .schalter input{width:26px;height:26px;flex:0 0 auto}
-.linkfeld{width:100%;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9rem;min-height:48px}
+input.linkfeld{width:100%;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9rem;min-height:48px}
 fieldset{border:1px solid var(--linie);border-radius:10px;margin:0 0 .8rem;padding:.5rem .8rem}
 legend{font-weight:700;padding:0 .3rem}
 
@@ -197,15 +197,15 @@ var LERNGANG = {
 
   titel: "Magnetismus",
 
-  /* Die 7 M-Module. Inhalte folgen in Phase 3. */
+  /* Die 7 M-Module (st = Station, in der das Modul erscheint) */
   module: [
-    { id: 1, name: "Feldlinien mit Richtung" },
-    { id: 2, name: "Relais" },
-    { id: 3, name: "Lorentzkraft und Drei-Finger-Regel" },
-    { id: 4, name: "Stator und Rotor" },
-    { id: 5, name: "Amplitude und Periode" },
-    { id: 6, name: "Vergleich Motor – Generator" },
-    { id: 7, name: "Stromformel am Transformator" }
+    { id: 1, name: "Feldlinien mit Richtung", st: "2" },
+    { id: 2, name: "Relais", st: "5" },
+    { id: 3, name: "Lorentzkraft und Drei-Finger-Regel", st: "6" },
+    { id: 4, name: "Stator und Rotor", st: "7" },
+    { id: 5, name: "Amplitude und Periode", st: "9a" },
+    { id: 6, name: "Vergleich Motor – Generator", st: "9b" },
+    { id: 7, name: "Stromformel am Transformator", st: "10" }
   ],
 
   /* Texte der Bedienoberfläche */
@@ -243,7 +243,11 @@ var LERNGANG = {
     lkTitel: "Einstellungen für die Lehrkraft", lkNiveau: "Grundniveau",
     lkR: "Regelklasse (R8)", lkM: "Mittlere-Reife-Klasse (M8) – schaltet alle Module ein",
     lkModule: "Module einzeln schalten",
-    lkModHinweis: "Im R8-Modus erscheint ein Modul als „Vertiefung“ (Sternchen), im M8-Modus als Pflichtinhalt mit M-Badge. Die Modul-Inhalte folgen in Phase 3.",
+    lkModHinweis: "Module sind Zusatzinhalte für M8, keine Stationen. Im R8-Modus erscheint ein eingeschaltetes Modul als „Vertiefung“ (Sternchen), im M8-Modus als Pflichtinhalt mit M-Badge.",
+    lkStationen: "Stationen freigeben",
+    lkBis: "Stationen ohne Sperre offen bis einschließlich:", lkBisKeine: "keine (jede Station öffnet sich erst nach den Basisaufgaben der vorigen)",
+    lkModulIn: "in Station",
+    trainerStand: "Richtig hintereinander: {a} von 3", trainerNaechste: "Nächste Aufgabe", trainerFertig: "Geschafft: drei richtige Antworten hintereinander. Du kannst weiter üben.",
     lkFrei: "Alle Stationen frei (ohne Sperre durch Basisaufgaben)",
     lkLink: "Link für diese Auswahl",
     lkLinkText: "Hängen Sie diesen Zusatz an die Adresse der Datei. Dann startet jedes Gerät mit dieser Einstellung. Der Link-Zusatz hat beim Öffnen immer Vorrang.",
@@ -259,6 +263,7 @@ var LERNGANG = {
     spule: '<svg viewBox="0 0 120 60"><path d="M10 40h15M95 40h15" stroke="#b86a1c" stroke-width="3"/><g fill="none" stroke="#b86a1c" stroke-width="3"><ellipse cx="30" cy="30" rx="6" ry="16"/><ellipse cx="42" cy="30" rx="6" ry="16"/><ellipse cx="54" cy="30" rx="6" ry="16"/><ellipse cx="66" cy="30" rx="6" ry="16"/><ellipse cx="78" cy="30" rx="6" ry="16"/><ellipse cx="90" cy="30" rx="6" ry="16"/></g></svg>',
     gleich: '<svg viewBox="0 0 120 60"><path d="M10 5v50M10 30h105" stroke="#566270" stroke-width="1.5" fill="none"/><path d="M10 15h100" stroke="#1f5fa8" stroke-width="3"/></svg>',
     wechsel: '<svg viewBox="0 0 120 60"><path d="M10 5v50M10 30h105" stroke="#566270" stroke-width="1.5" fill="none"/><path d="M10 30C22 0 34 0 46 30S70 60 82 30S106 0 118 30" stroke="#1f5fa8" stroke-width="3" fill="none"/></svg>',
+    finger: '<svg viewBox="0 0 120 60"><g stroke-width="3" fill="none"><path d="M45 40V8" stroke="#1f5fa8"/><path d="M45 40H100" stroke="#e08a00"/><path d="M45 40L18 54" stroke="#7b1fa2"/></g><text x="50" y="14" font-size="9" fill="#1f5fa8">Feld</text><text x="76" y="36" font-size="9" fill="#8a5200">Strom</text><text x="2" y="44" font-size="9" fill="#7b1fa2">Kraft</text></svg>',
     trafo: '<svg viewBox="0 0 120 60"><rect x="35" y="8" width="50" height="44" fill="none" stroke="#8d96a0" stroke-width="9"/><g stroke="#b86a1c" stroke-width="3"><path d="M27 20h16M27 26h16M27 32h16M27 38h16"/></g><g stroke="#1f5fa8" stroke-width="3"><path d="M77 24h16M77 30h16M77 36h16"/></g></svg>'
   },
 
@@ -415,7 +420,8 @@ var LERNGANG = {
       { w: "die Feldlinie", e: "Eine gedachte Linie. Sie zeigt, wie sich Kompassnadeln im Magnetfeld ausrichten." },
       { w: "die Kompassnadel", e: "Ein kleiner drehbarer Magnet. Die rote Spitze ist ihr Nordpol.", s: "kompass" },
       { w: "der Stabmagnet", e: "Ein gerader Magnet. Die Pole sind an den beiden Enden.", s: "stab" },
-      { w: "der Hufeisenmagnet", e: "Ein gebogener Magnet in U-Form. Die Pole liegen nebeneinander.", s: "huf" }
+      { w: "der Hufeisenmagnet", e: "Ein gebogener Magnet in U-Form. Die Pole liegen nebeneinander.", s: "huf" },
+      { w: "die Feldrichtung", modul: 1, e: "Die Richtung der Feldlinien: außen vom Nordpol zum Südpol." }
     ],
     teile: [
       { typ: "text", abs: [
@@ -429,7 +435,26 @@ var LERNGANG = {
         "**Feldlinien** sind ein Modell. Sie zeigen, wie sich die Kompassnadeln ausrichten.",
         "Wo die Feldlinien dicht liegen, ist das Magnetfeld stark.",
         "Feldlinien haben keinen Anfang und kein Ende. Sie laufen im Magneten weiter." ] },
-      { typ: "text", modul: 1, titel: "Feldlinien haben eine Richtung", abs: [] /* Phase 3 */ },
+      { typ: "text", modul: 1, titel: "Feldlinien haben eine Richtung", abs: [
+        "Man hat festgelegt: Feldlinien haben eine **Richtung**.",
+        "Außerhalb des Magneten zeigen sie vom Nordpol zum Südpol.",
+        "Im Magneten laufen sie vom Südpol zurück zum Nordpol. So sind die Feldlinien geschlossen.",
+        "Der Nordpol einer Kompassnadel zeigt immer in die Richtung der Feldlinie.",
+        "Schalte in der Simulation oben die Feldlinien ein. Du siehst jetzt Pfeile." ] },
+      { typ: "aufgabe", id: "s2_m1", art: "wahl", basis: true, modul: 1,
+        frage: "In welche Richtung zeigen die Feldlinien außerhalb eines Magneten?",
+        optionen: [
+          { t: "vom Südpol zum Nordpol", fb: "So verlaufen sie im Inneren des Magneten. Außen ist es umgekehrt." },
+          { t: "vom Nordpol zum Südpol", ok: true, fb: "Außen zeigen die Feldlinien vom Nordpol zum Südpol. Innen laufen sie zurück." },
+          { t: "Feldlinien haben keine Richtung.", fb: "Doch. Die Richtung ist festgelegt: So zeigt der Nordpol einer Kompassnadel." } ],
+        hilfe: ["Schau dir die Pfeile in der Simulation an.", "Die Pfeile kommen aus dem roten Pol (N) heraus."] },
+      { typ: "aufgabe", id: "s2_m2", art: "wahl", modul: 1,
+        frage: "Eine Kompassnadel steht direkt vor dem Südpol eines Stabmagneten. Wohin zeigt ihre rote Spitze?",
+        optionen: [
+          { t: "zum Südpol des Magneten hin", ok: true, fb: "Die rote Spitze ist der Nordpol der Nadel. Sie zeigt in Feldrichtung: zum Südpol hin." },
+          { t: "vom Südpol weg", fb: "Ungleiche Pole ziehen sich an. Der Nordpol der Nadel zeigt zum Südpol." },
+          { t: "immer nach oben", fb: "Nahe am Magneten bestimmt sein Feld die Richtung der Nadel." } ],
+        hilfe: ["Ziehe den großen Kompass in der Simulation vor den Südpol.", "Die Feldlinien enden außen am Südpol. Die rote Spitze folgt den Pfeilen."] },
       { typ: "aufgabe", id: "s2_a1", art: "wahl", basis: true,
         frage: "Wo ist das Magnetfeld eines Stabmagneten am stärksten?",
         optionen: [
@@ -622,7 +647,10 @@ var LERNGANG = {
       { w: "der Hubmagnet", e: "Ein großer Elektromagnet an einem Kran. Er hebt Eisen und Stahl." },
       { w: "der Elektromagnet", e: "Eine Spule, durch die Strom fließt. Man kann ihn ein- und ausschalten.", s: "spule" },
       { w: "der Schalter", e: "Er öffnet oder schließt den Stromkreis." },
-      { w: "der Anker", e: "Ein bewegliches Eisenstück. Ein Elektromagnet zieht es an. (Wichtig bei der Klingel.)" }
+      { w: "der Anker", e: "Ein bewegliches Eisenstück. Ein Elektromagnet zieht es an. (Wichtig bei der Klingel.)" },
+      { w: "das Relais", modul: 2, e: "Ein Schalter, den ein Elektromagnet betätigt." },
+      { w: "der Steuerstromkreis", modul: 2, e: "Der Stromkreis mit der Spule des Relais. Hier fließt ein kleiner Strom." },
+      { w: "der Arbeitsstromkreis", modul: 2, e: "Der Stromkreis, den das Relais schaltet. Hier kann ein großer Strom fließen." }
     ],
     teile: [
       { typ: "text", abs: [
@@ -661,7 +689,31 @@ var LERNGANG = {
         anfaenge: ["Wenn der Strom eingeschaltet ist, …", "Der Eisenschrott …", "Wenn der Strom ausgeschaltet wird, …"],
         muster: ["Wenn der Strom eingeschaltet ist, ist der Hubmagnet magnetisch.", "Der Eisenschrott wird angezogen und hängt am Magneten.", "Wenn der Strom ausgeschaltet wird, verschwindet das Magnetfeld und der Schrott fällt herunter."],
         hilfe: ["Nutze die Satzanfänge.", "Beschreibe nacheinander: Strom an – Schrott hängt – Strom aus."] },
-      { typ: "text", modul: 2, titel: "Zweite Anwendung: das Relais", abs: [] /* Phase 3 */ },
+      { typ: "text", modul: 2, titel: "Zweite Anwendung: das Relais", abs: [
+        "Ein **Relais** ist ein Schalter, den ein Elektromagnet betätigt.",
+        "Ein Relais verbindet zwei getrennte Stromkreise.",
+        "Im **Steuerstromkreis** liegt die Spule. Hier fließt nur ein kleiner Strom.",
+        "Im **Arbeitsstromkreis** liegt das Gerät, zum Beispiel ein starker Motor. Hier kann ein großer Strom fließen.",
+        "So schaltet man mit einem kleinen Strom einen großen Strom. Beispiel: Der Anlasser eines Autos wird über ein Relais eingeschaltet." ] },
+      { typ: "sim", modul: 2, sim: "schritte", szene: "relais", titel: "So arbeitet das Relais",
+        schritte: [
+          "Der Schalter im Steuerstromkreis ist offen. Die Spule ist nicht magnetisch. Der Arbeitsstromkreis ist unterbrochen. Die Lampe ist aus.",
+          "Der Schalter wird geschlossen. Im Steuerstromkreis fließt ein kleiner Strom. Die Spule wird zum Elektromagneten.",
+          "Der Elektromagnet zieht den Anker an. Der Anker berührt den Kontakt. Der Arbeitsstromkreis ist geschlossen. Die Lampe leuchtet.",
+          "Der Schalter wird geöffnet. Die Spule verliert ihre Kraft. Die Feder zieht den Anker zurück. Die Lampe geht aus." ] },
+      { typ: "aufgabe", id: "s5_m1", art: "wahl", basis: true, modul: 2,
+        frage: "Was macht ein Relais?",
+        optionen: [
+          { t: "Es erzeugt Strom für den Arbeitsstromkreis.", fb: "Ein Relais erzeugt keinen Strom. Es schaltet nur." },
+          { t: "Es schaltet mit einem kleinen Strom einen anderen Stromkreis ein und aus.", ok: true, fb: "Der kleine Strom im Steuerstromkreis schaltet den Arbeitsstromkreis." },
+          { t: "Es macht aus Gleichspannung Wechselspannung.", fb: "Das kann ein Relais nicht. Es ist ein Schalter." } ],
+        hilfe: ["Schau dir in der Animation an, was der Anker macht.", "Das Relais ist ein Schalter, den ein Elektromagnet bewegt."] },
+      { typ: "aufgabe", id: "s5_m2", art: "wahl", modul: 2,
+        frage: "Sind Steuerstromkreis und Arbeitsstromkreis durch einen Draht verbunden?",
+        optionen: [
+          { t: "Ja. Der Strom fließt von einem Kreis in den anderen.", fb: "Schau genau hin: Es gibt keinen Draht zwischen den beiden Kreisen." },
+          { t: "Nein. Nur die Magnetkraft bewegt den Anker und schließt so den Arbeitsstromkreis.", ok: true, fb: "Die beiden Stromkreise sind getrennt. Das macht das Schalten großer Ströme sicher." } ],
+        hilfe: ["Verfolge in der Animation die Leitungen der beiden Stromkreise.", "Die Spule berührt den Anker nicht. Sie zieht ihn nur an."] },
       { typ: "text", stern: true, titel: "★ Für Schnelle: die elektrische Klingel", abs: [
         "Auch in einer alten Türklingel steckt ein Elektromagnet.",
         "Er zieht ein bewegliches Eisenstück an. Es heißt **Anker**. Am Anker sitzt der Klöppel. Er schlägt gegen die Glocke." ] },
@@ -697,6 +749,8 @@ var LERNGANG = {
       { w: "die Kraft", e: "Eine Kraft kann etwas in Bewegung setzen." },
       { w: "die Stromrichtung", e: "Die Richtung, in die der Strom fließt." },
       { w: "umpolen", e: "Die Anschlüsse an der Batterie tauschen. Dann fließt der Strom andersherum." },
+      { w: "die Lorentzkraft", modul: 3, e: "Die Kraft auf einen stromdurchflossenen Leiter im Magnetfeld." },
+      { w: "die Drei-Finger-Regel", modul: 3, e: "Regel für die rechte Hand. Daumen: Strom. Zeigefinger: Magnetfeld. Mittelfinger: Kraft.", s: "finger" },
       { w: "der Hufeisenmagnet", e: "Ein gebogener Magnet in U-Form. Die Pole liegen nebeneinander.", s: "huf" }
     ],
     teile: [
@@ -714,7 +768,23 @@ var LERNGANG = {
         fb: "Deine Vermutung ist gespeichert. Prüfe sie jetzt mit der Simulation." },
       { typ: "sim", sim: "schaukel", nach: "s6_hyp", titel: "Prüfe deine Vermutung",
         hinweis: "Schalte den Strom ein. Kehre dann die Stromrichtung um. Drehe danach den Magneten um." },
-      { typ: "text", modul: 3, titel: "Lorentzkraft und Drei-Finger-Regel", abs: [] /* Phase 3 */ },
+      { typ: "text", modul: 3, titel: "Lorentzkraft und Drei-Finger-Regel", abs: [
+        "Die Kraft auf einen stromdurchflossenen Leiter im Magnetfeld hat einen Namen: **Lorentzkraft**. Sie ist nach dem Physiker Hendrik Antoon Lorentz benannt.",
+        "Die Richtung dieser Kraft kannst du vorhersagen. Dazu dient die **Drei-Finger-Regel** der rechten Hand.",
+        "Spreize Daumen, Zeigefinger und Mittelfinger. Sie sollen zueinander stehen wie drei Kanten an einer Würfelecke.",
+        "Der **Daumen** zeigt in die Stromrichtung: vom Pluspol zum Minuspol.",
+        "Der **Zeigefinger** zeigt in die Richtung des Magnetfelds: vom Nordpol zum Südpol.",
+        "Der **Mittelfinger** zeigt dann in die Richtung der Kraft." ] },
+      { typ: "aufgabe", id: "s6_m1", art: "trainer", sim: "dreifinger", basis: true, modul: 3,
+        frage: "Trainer: Sage die Richtung der Kraft vorher. Du brauchst drei richtige Antworten hintereinander.",
+        hilfe: ["Halte deine rechte Hand vor das Bild. Der Zeigefinger zeigt vom Nordpol zum Südpol.", "Punkt bedeutet: Der Daumen zeigt auf dich zu. Kreuz bedeutet: Der Daumen zeigt von dir weg. Der Mittelfinger zeigt dann die Kraft."] },
+      { typ: "aufgabe", id: "s6_m2", art: "wahl", modul: 3,
+        frage: "Wofür steht der Zeigefinger bei der Drei-Finger-Regel?",
+        optionen: [
+          { t: "für die Stromrichtung", fb: "Die Stromrichtung zeigt der Daumen." },
+          { t: "für die Richtung des Magnetfelds", ok: true, fb: "Daumen: Strom. Zeigefinger: Magnetfeld. Mittelfinger: Kraft." },
+          { t: "für die Richtung der Kraft", fb: "Die Kraft zeigt der Mittelfinger." } ],
+        hilfe: ["Die Reihenfolge der Finger ist: Daumen, Zeigefinger, Mittelfinger.", "Die Reihenfolge der Größen ist: Strom, Magnetfeld, Kraft."] },
       { typ: "aufgabe", id: "s6_a1", art: "wahl", basis: true,
         frage: "Du kehrst die Stromrichtung um. Wie bewegt sich der Leiter jetzt?",
         optionen: [
@@ -775,7 +845,9 @@ var LERNGANG = {
       { w: "die Spule", e: "Ein aufgewickelter Draht. Im Motor ist sie drehbar.", s: "spule" },
       { w: "der Polwender", e: "Zwei Halbringe auf der Achse. Sie kehren die Stromrichtung in der Spule um. Anderes Wort: der Kommutator." },
       { w: "der Schleifkontakt", e: "Er schleift am Polwender und leitet den Strom zur drehenden Spule. Anderes Wort: die Kohlebürste." },
-      { w: "die Achse", e: "Der Stab in der Mitte, um den sich die Spule dreht." }
+      { w: "die Achse", e: "Der Stab in der Mitte, um den sich die Spule dreht." },
+      { w: "der Stator", modul: 4, e: "Der feststehende Teil eines Motors oder Generators." },
+      { w: "der Rotor", modul: 4, e: "Der drehbare Teil eines Motors oder Generators." }
     ],
     teile: [
       { typ: "text", abs: [
@@ -793,7 +865,21 @@ var LERNGANG = {
           { w: 90, t: "Jetzt stehen sich ungleiche Pole gegenüber. Hier würde die Spule stehen bleiben. Genau jetzt berühren die Schleifkontakte die Lücken im Polwender. Kurz fließt kein Strom. Der Schwung dreht die Spule weiter." },
           { w: 120, t: "Der Polwender hat die Stromrichtung in der Spule umgekehrt. Dadurch sind die Pole der Spule vertauscht. Jetzt stehen sich gleiche Pole gegenüber. Sie stoßen sich ab. Die Spule dreht sich weiter." },
           { w: 180, t: "Eine halbe Umdrehung ist geschafft. Alles beginnt von vorn. So dreht sich der Motor immer weiter." } ] },
-      { typ: "text", modul: 4, titel: "Fachbegriffe: Stator und Rotor", abs: [] /* Phase 3 */ },
+      { typ: "text", modul: 4, titel: "Fachbegriffe: Stator und Rotor", abs: [
+        "Der feststehende Teil eines Motors heißt **Stator**. Das Wort ist mit „stehen“ verwandt.",
+        "Der drehbare Teil heißt **Rotor**. Das Wort kommt von „rotieren“. Das bedeutet: sich drehen.",
+        "In unserem Motor ist der Dauermagnet der Stator.",
+        "Die Spule mit Achse und Polwender ist der Rotor." ] },
+      { typ: "aufgabe", id: "s7_m1", art: "sortieren", basis: true, modul: 4,
+        frage: "Stator oder Rotor? Sortiere die Bauteile des Motors.",
+        faecher: [ { id: "s", name: "Stator (steht fest)" }, { id: "r", name: "Rotor (dreht sich)" } ],
+        karten: [
+          { t: "Dauermagnet", fach: "s", fb: "Der Dauermagnet steht fest." },
+          { t: "Schleifkontakte", fach: "s", fb: "Die Schleifkontakte stehen fest. Der Polwender dreht sich an ihnen vorbei." },
+          { t: "Spule", fach: "r", fb: "Die Spule dreht sich." },
+          { t: "Polwender", fach: "r", fb: "Der Polwender sitzt auf der Achse und dreht sich mit." },
+          { t: "Achse", fach: "r", fb: "Die Achse dreht sich mit der Spule." } ],
+        hilfe: ["Lass den Motor in der Animation laufen. Was bewegt sich?", "Nur der Dauermagnet und die Schleifkontakte stehen fest."] },
       { typ: "aufgabe", id: "s7_a1", art: "sortieren", basis: true, bild: "motor",
         frage: "Beschrifte den Motor. Ziehe jeden Begriff zur passenden Nummer.",
         faecher: [ { id: "1", name: "Nummer 1" }, { id: "2", name: "Nummer 2" }, { id: "3", name: "Nummer 3" }, { id: "4", name: "Nummer 4" } ],
@@ -821,7 +907,7 @@ var LERNGANG = {
         "Über solche Geräte kann man verschieden sprechen.",
         "Eine **sachliche Aussage** kann man prüfen, zum Beispiel durch Messen. Beispiel: „Der Föhn hat 2000 Watt.“",
         "Eine **wertende Aussage** ist eine Meinung. Beispiel: „Der Föhn ist viel zu laut.“" ] },
-      { typ: "aufgabe", id: "s7_a4", art: "sortieren",
+      { typ: "aufgabe", id: "s7_a4", art: "sortieren", basis: true,
         frage: "Sachlich oder wertend? Sortiere die Aussagen.",
         faecher: [ { id: "s", name: "sachliche Aussage" }, { id: "w", name: "wertende Aussage" } ],
         karten: [
@@ -949,7 +1035,9 @@ var LERNGANG = {
       { w: "die Gleichspannung", e: "Eine Spannung, die immer in dieselbe Richtung antreibt. Beispiel: Batterie.", s: "gleich" },
       { w: "die Wechselspannung", e: "Eine Spannung, die ständig ihre Richtung wechselt. Beispiel: Steckdose.", s: "wechsel" },
       { w: "die Frequenz", e: "Sie gibt an, wie oft etwas in einer Sekunde hin- und herschwingt." },
-      { w: "das Hertz", e: "Die Einheit der Frequenz, kurz Hz. 1 Hz bedeutet: eine Schwingung in einer Sekunde." }
+      { w: "das Hertz", e: "Die Einheit der Frequenz, kurz Hz. 1 Hz bedeutet: eine Schwingung in einer Sekunde." },
+      { w: "die Amplitude", modul: 5, e: "Der höchste Wert der Spannung, gemessen von der Nulllinie aus.", s: "wechsel" },
+      { w: "die Periode", modul: 5, e: "Die Zeit für eine vollständige Schwingung. Formelzeichen: T." }
     ],
     teile: [
       { typ: "text", abs: [
@@ -963,7 +1051,28 @@ var LERNGANG = {
         "Die Einheit heißt **Hertz** (Hz). 1 Hz bedeutet: eine Schwingung in einer Sekunde.",
         "Die Einheit ist nach dem deutschen Physiker Heinrich Hertz benannt. Er lebte von 1857 bis 1894.",
         "Unser Stromnetz hat 230 V und 50 Hz." ] },
-      { typ: "text", modul: 5, titel: "Amplitude und Periode", abs: [] /* Phase 3 */ },
+      { typ: "text", modul: 5, titel: "Amplitude und Periode", abs: [
+        "Das Spannungs-Zeit-Diagramm einer Wechselspannung ist eine Wellenlinie.",
+        "Die **Amplitude** ist der höchste Wert der Spannung. Man misst sie von der Nulllinie bis zum höchsten Punkt.",
+        "Die **Periode** ist die Zeit für eine vollständige Schwingung: einmal hin und einmal her. Ihr Formelzeichen ist T.",
+        "Je kürzer die Periode ist, desto höher ist die Frequenz.",
+        "Im Stromnetz mit 50 Hz dauert eine Periode nur 0,02 Sekunden." ] },
+      { typ: "sim", modul: 5, sim: "sinus", titel: "Probiere aus: Amplitude und Periode",
+        hinweis: "Wähle verschiedene Werte. Beobachte den roten und den violetten Pfeil im Diagramm." },
+      { typ: "aufgabe", id: "s9a_m1", art: "wahl", basis: true, modul: 5,
+        frage: "Was gibt die Amplitude einer Wechselspannung an?",
+        optionen: [
+          { t: "den höchsten Wert der Spannung", ok: true, fb: "Die Amplitude misst man von der Nulllinie bis zum höchsten Punkt der Kurve." },
+          { t: "die Zeit für eine Schwingung", fb: "Das ist die Periode." },
+          { t: "die Anzahl der Schwingungen in einer Sekunde", fb: "Das ist die Frequenz." } ],
+        hilfe: ["Schau im Diagramm auf den roten Pfeil.", "Der rote Pfeil reicht von der Nulllinie bis zum höchsten Punkt."] },
+      { typ: "aufgabe", id: "s9a_m2", art: "wahl", modul: 5,
+        frage: "Die Periode einer Wechselspannung wird kürzer. Was passiert mit der Frequenz?",
+        optionen: [
+          { t: "Die Frequenz wird höher.", ok: true, fb: "Dauert eine Schwingung kürzer, dann passen mehr Schwingungen in eine Sekunde." },
+          { t: "Die Frequenz wird niedriger.", fb: "Stelle in der Simulation eine kürzere Periode ein. Zähle die Schwingungen in einer Sekunde." },
+          { t: "Die Frequenz bleibt gleich.", fb: "Periode und Frequenz hängen zusammen." } ],
+        hilfe: ["Wähle in der Simulation erst 2 s und dann 0,5 s als Periode.", "Kurze Periode: viele Schwingungen pro Sekunde."] },
       { typ: "aufgabe", id: "s9a_a1", art: "wahl", basis: true,
         frage: "Wie bewegen sich die Elektronen bei Wechselspannung?",
         optionen: [
@@ -1021,7 +1130,8 @@ var LERNGANG = {
       { w: "die Turbine", e: "Ein Rad mit Schaufeln. Wasser, Wind oder Dampf drehen es." },
       { w: "die Wechselspannung", e: "Eine Spannung, die ständig ihre Richtung wechselt.", s: "wechsel" },
       { w: "die Induktion", e: "Ein sich änderndes Magnetfeld erzeugt in einer Spule eine Spannung." },
-      { w: "die Energieumwandlung", e: "Eine Energieform wird zu einer anderen. Beispiel: Bewegung wird zu elektrischer Energie." }
+      { w: "die Energieumwandlung", e: "Eine Energieform wird zu einer anderen. Beispiel: Bewegung wird zu elektrischer Energie." },
+      { w: "umkehrbar", modul: 6, e: "Etwas funktioniert in beide Richtungen. Ein Motor kann auch als Generator arbeiten." }
     ],
     teile: [
       { typ: "text", abs: [
@@ -1050,7 +1160,33 @@ var LERNGANG = {
         "Im Kraftwerk steht ein riesiger **Kraftwerksgenerator**. Eine **Turbine** dreht ihn. Die Turbine wird von Wasser, Wind oder Dampf angetrieben.",
         "Ein **Notstromgenerator** liefert Strom, wenn das Netz ausfällt, zum Beispiel im Krankenhaus. Ihn treibt ein Dieselmotor an.",
         "Auch der Fahrraddynamo ist ein kleiner Generator." ] },
-      { typ: "text", modul: 6, titel: "Motor und Generator im Vergleich", abs: [] /* Phase 3 */ },
+      { typ: "text", modul: 6, titel: "Motor und Generator im Vergleich", abs: [
+        "Motor und Generator sind fast gleich gebaut. Beide haben einen Magneten und eine drehbare Spule.",
+        "Der **Motor** wandelt elektrische Energie in Bewegungsenergie um. Man schließt ihn an eine Spannung an, und er dreht sich.",
+        "Der **Generator** wandelt Bewegungsenergie in elektrische Energie um. Man dreht ihn, und er liefert eine Spannung.",
+        "Die Energieumwandlung ist also **umkehrbar**. Viele Maschinen können beides.",
+        "Beispiel: Der Motor eines E-Bikes oder E-Autos arbeitet beim Bremsen als Generator. Er lädt dann den Akku." ] },
+      { typ: "aufgabe", id: "s9b_m1", art: "sortieren", basis: true, modul: 6,
+        frage: "Motor oder Generator? Sortiere.",
+        faecher: [ { id: "m", name: "Motor" }, { id: "g", name: "Generator" } ],
+        karten: [
+          { t: "wandelt elektrische Energie in Bewegung um", fach: "m", fb: "Das ist die Aufgabe des Motors." },
+          { t: "wandelt Bewegung in elektrische Energie um", fach: "g", fb: "Das ist die Aufgabe des Generators." },
+          { t: "Antrieb im Akkuschrauber", fach: "m", fb: "Der Akku liefert elektrische Energie. Der Motor dreht die Schraube." },
+          { t: "Fahrraddynamo", fach: "g", fb: "Das Rad dreht den Dynamo. Er liefert die Spannung für das Licht." },
+          { t: "Maschine in der Windkraftanlage", fach: "g", fb: "Der Wind dreht den Generator." },
+          { t: "Antrieb im Ventilator", fach: "m", fb: "Der Motor dreht die Flügel." } ],
+        hilfe: ["Frage dich: Was geht hinein, was kommt heraus?", "Strom hinein, Bewegung heraus: Motor. Bewegung hinein, Spannung heraus: Generator."] },
+      { typ: "aufgabe", id: "s9b_m2", art: "wahl", modul: 6,
+        frage: "Du drehst die Achse eines kleinen Spielzeugmotors schnell mit der Hand. Was kannst du an den Anschlüssen messen?",
+        optionen: [
+          { t: "Nichts. Ein Motor kann nur Strom aufnehmen.", fb: "Im Motor dreht sich eine Spule im Magnetfeld. Was passiert dabei nach Station 8?" },
+          { t: "Eine Spannung. Der Motor arbeitet jetzt als Generator.", ok: true, fb: "Die Energieumwandlung ist umkehrbar. Beim Drehen entsteht durch Induktion eine Spannung." } ],
+        hilfe: ["Im Motor steckt eine Spule in einem Magnetfeld.", "Dreht man die Spule, ändert sich das Magnetfeld in ihr. Es entsteht eine Induktionsspannung."] },
+      { typ: "versuch", modul: 6, abs: [
+        "Schließe ein Messgerät oder eine Leuchtdiode an einen Spielzeugmotor an.",
+        "Drehe die Achse schnell mit den Fingern oder ziehe eine Schnur ab, die um die Achse gewickelt ist.",
+        "Der Motor arbeitet jetzt als Generator." ] },
       { typ: "aufgabe", id: "s9b_a3", art: "wahl",
         frage: "Was dreht den Generator in einer Windkraftanlage?",
         optionen: [
@@ -1095,7 +1231,8 @@ var LERNGANG = {
       { w: "die Sekundärspule", e: "Die Spule am Ausgang. An ihr entsteht die Spannung U2. Sie hat N2 Windungen." },
       { w: "der Eisenkern", e: "Ein geschlossener Ring aus Eisen. Er leitet das Magnetfeld von einer Spule zur anderen." },
       { w: "die Windungszahl", e: "Die Anzahl der Windungen einer Spule. Formelzeichen: N." },
-      { w: "das Verhältnis", e: "Der Vergleich zweier Zahlen. 2 : 1 bedeutet: doppelt so viel." }
+      { w: "das Verhältnis", e: "Der Vergleich zweier Zahlen. 2 : 1 bedeutet: doppelt so viel." },
+      { w: "die Stromformel", modul: 7, e: "I1 : I2 = N2 : N1. Die Stromstärken verhalten sich umgekehrt wie die Windungszahlen." }
     ],
     teile: [
       { typ: "text", titel: "Aufbau", abs: [
@@ -1145,7 +1282,29 @@ var LERNGANG = {
         "Im **Umspannwerk** stehen große Trafos. Sie machen die Spannung für die Fernleitungen sehr hoch. In der Nähe der Häuser machen andere Trafos sie wieder niedrig: 230 V.",
         "Im **Netzteil** macht ein Trafo aus 230 V eine ungefährliche Kleinspannung, zum Beispiel für die Klingel oder das Ladegerät.",
         "Beim **Schmelzofen** hat die Sekundärspule nur ganz wenige Windungen. Die Spannung ist klein, aber die Stromstärke ist riesig. Das Metall wird so heiß, dass es schmilzt." ] },
-      { typ: "text", modul: 7, titel: "Die Stromformel am Transformator", abs: [] /* Phase 3 */ },
+      { typ: "text", modul: 7, titel: "Die Stromformel am Transformator", abs: [
+        "Bisher war an den Trafo kein Gerät angeschlossen.",
+        "Schließt man ein Gerät an die Sekundärspule an, dann fließt in beiden Spulen Strom.",
+        "Für die Stromstärken gilt: **I1 : I2 = N2 : N1**",
+        "Achtung: Die Windungszahlen stehen hier umgekehrt.",
+        "Die Spule mit weniger Windungen hat die kleinere Spannung, aber die größere Stromstärke.",
+        "Das erklärt den Schmelzofen: Die Sekundärspule hat sehr wenige Windungen. Deshalb ist dort die Stromstärke riesig.",
+        "Die Formel gilt für einen Trafo ohne Verluste." ] },
+      { typ: "aufgabe", id: "s10_m1", art: "zahl", basis: true, modul: 7, loesung: 200, einheit: "A",
+        frage: "Ein Schmelzofen-Trafo hat N1 = 600 Windungen und N2 = 6 Windungen. In der Primärspule fließt I1 = 2 A. Wie groß ist I2?",
+        fb: "Die Sekundärspule hat 100-mal weniger Windungen. Also ist dort die Stromstärke 100-mal so groß: 2 A · 100 = 200 A.",
+        hilfe: ["Vergleiche die Windungszahlen: Wie oft passt 6 in 600?", "Weniger Windungen bedeuten mehr Strom. Rechne 2 A · 100."] },
+      { typ: "aufgabe", id: "s10_m2", art: "zahl", modul: 7, loesung: 0.1, toleranz: 0.001, einheit: "A",
+        frage: "Ein Ladegerät hat N1 = 1000 Windungen und N2 = 50 Windungen. In der Sekundärspule fließt I2 = 2 A. Wie groß ist I1?",
+        fb: "Die Primärspule hat 20-mal so viele Windungen. Also ist dort die Stromstärke 20-mal kleiner: 2 A : 20 = 0,1 A.",
+        hilfe: ["Wie oft passt 50 in 1000?", "Mehr Windungen bedeuten weniger Strom. Rechne 2 A : 20."] },
+      { typ: "aufgabe", id: "s10_m3", art: "wahl", modul: 7,
+        frage: "Ein Trafo macht die Spannung zehnmal so groß. Was passiert mit der Stromstärke?",
+        optionen: [
+          { t: "Sie wird auch zehnmal so groß.", fb: "Dann würde der Trafo Energie erzeugen. Das kann er nicht." },
+          { t: "Sie sinkt auf ein Zehntel.", ok: true, fb: "Mehr Spannung bedeutet weniger Stromstärke. Die Energie wird nicht mehr." },
+          { t: "Sie bleibt gleich.", fb: "Auch dann käme mehr Energie heraus, als hineingeht." } ],
+        hilfe: ["Bei den Stromstärken stehen die Windungszahlen umgekehrt.", "Zehnmal mehr Windungen: ein Zehntel der Stromstärke."] },
       { typ: "aufgabe", id: "s10_a6", art: "sortieren",
         frage: "Macht der Trafo die Spannung hier kleiner oder größer?",
         faecher: [ { id: "k", name: "Spannung wird kleiner" }, { id: "g", name: "Spannung wird größer" } ],
@@ -1228,7 +1387,23 @@ var LERNGANG = {
     { id: "q18", st: "s10", frage: "Ein Trafo hat N1 = 400 und N2 = 100 Windungen. Es ist U1 = 20 V. Wie groß ist U2?",
       optionen: [ { t: "80 V", fb: "Die Sekundärspule hat weniger Windungen. Die Spannung wird kleiner." }, { t: "5 V", ok: true, fb: "Ein Viertel der Windungen: ein Viertel der Spannung. 20 V : 4 = 5 V." }, { t: "20 V", fb: "Die Windungszahlen sind verschieden. Also sind auch die Spannungen verschieden." } ] },
     { id: "q19", st: "s10", frage: "Erzeugt ein Trafo Energie?",
-      optionen: [ { t: "Ja, wenn er die Spannung erhöht.", fb: "Höhere Spannung bedeutet nicht mehr Energie." }, { t: "Nein. Er ändert nur die Spannung.", ok: true, fb: "Ein Trafo gibt höchstens so viel Energie ab, wie er aufnimmt." } ] }
+      optionen: [ { t: "Ja, wenn er die Spannung erhöht.", fb: "Höhere Spannung bedeutet nicht mehr Energie." }, { t: "Nein. Er ändert nur die Spannung.", ok: true, fb: "Ein Trafo gibt höchstens so viel Energie ab, wie er aufnimmt." } ] },
+
+    /* ----- Fragen zu den M-Modulen ----- */
+    { id: "qm1", st: "s2", modul: 1, frage: "Wie verlaufen die Feldlinien außerhalb eines Stabmagneten?",
+      optionen: [ { t: "vom Nordpol zum Südpol", ok: true, fb: "Im Magneten laufen sie vom Südpol zum Nordpol zurück." }, { t: "vom Südpol zum Nordpol", fb: "So verlaufen sie nur im Inneren." }, { t: "von beiden Polen nach außen", fb: "Feldlinien sind geschlossen. Sie führen von Pol zu Pol." } ] },
+    { id: "qm2", st: "s5", modul: 2, frage: "Wozu dient ein Relais?",
+      optionen: [ { t: "Es schaltet mit einem kleinen Strom einen großen Strom.", ok: true, fb: "Der Steuerstromkreis schaltet den Arbeitsstromkreis." }, { t: "Es speichert Strom.", fb: "Ein Relais ist ein Schalter, kein Speicher." }, { t: "Es misst die Stromstärke.", fb: "Zum Messen nimmt man ein Messgerät." } ] },
+    { id: "qm3", st: "s6", modul: 3, frage: "Was zeigt der Mittelfinger bei der Drei-Finger-Regel der rechten Hand?",
+      optionen: [ { t: "die Stromrichtung", fb: "Die zeigt der Daumen." }, { t: "die Richtung des Magnetfelds", fb: "Die zeigt der Zeigefinger." }, { t: "die Richtung der Kraft", ok: true, fb: "Daumen: Strom. Zeigefinger: Magnetfeld. Mittelfinger: Kraft." } ] },
+    { id: "qm4", st: "s7", modul: 4, frage: "Welches Bauteil gehört zum Rotor?",
+      optionen: [ { t: "der Dauermagnet", fb: "Der Dauermagnet steht fest. Er ist der Stator." }, { t: "die drehbare Spule", ok: true, fb: "Der Rotor ist der Teil, der sich dreht." }, { t: "die Batterie", fb: "Die Batterie gehört nicht zum Motor selbst." } ] },
+    { id: "qm5", st: "s9a", modul: 5, frage: "Was ist die Periode einer Wechselspannung?",
+      optionen: [ { t: "die Zeit für eine vollständige Schwingung", ok: true, fb: "Formelzeichen T. Bei 50 Hz sind das 0,02 Sekunden." }, { t: "der höchste Wert der Spannung", fb: "Das ist die Amplitude." }, { t: "die Anzahl der Windungen", fb: "Das ist die Windungszahl." } ] },
+    { id: "qm6", st: "s9b", modul: 6, frage: "Was bedeutet: Die Energieumwandlung im Motor ist umkehrbar?",
+      optionen: [ { t: "Der Motor kann sich in beide Richtungen drehen.", fb: "Das stimmt zwar, ist hier aber nicht gemeint." }, { t: "Dreht man den Motor von außen, liefert er eine Spannung. Er arbeitet als Generator.", ok: true, fb: "Aus Bewegung wird dann elektrische Energie." }, { t: "Der Motor verbraucht keine Energie.", fb: "Der Motor wandelt Energie um." } ] },
+    { id: "qm7", st: "s10", modul: 7, frage: "Ein Trafo hat N1 = 100 und N2 = 400 Windungen. Es fließt I1 = 4 A. Wie groß ist I2?",
+      optionen: [ { t: "16 A", fb: "Bei den Stromstärken stehen die Windungszahlen umgekehrt." }, { t: "1 A", ok: true, fb: "Viermal so viele Windungen: ein Viertel der Stromstärke. 4 A : 4 = 1 A." }, { t: "4 A", fb: "Die Windungszahlen sind verschieden. Also sind auch die Stromstärken verschieden." } ] }
   ]
 };
 
@@ -1674,6 +1849,37 @@ var SIMS = {};
       text(g, strom ? "Strom fließt (orange)." : "Es fließt kein Strom.", 600, 60, 16, strom ? "#8a5200" : FA.mut);
     }
   };
+  /* Modul 2: Relais mit Steuerstromkreis (links unten) und Arbeitsstromkreis (rechts) */
+  SZENEN.relais = function (cv, i) {
+    var g = cv.g, zu = i === 1 || i === 2, anz = i === 2, ax = anz ? 308 : 325;
+    var ks = zu ? FA.strom : FA.ink, ka = anz ? FA.strom : FA.ink;
+    /* Steuerstromkreis */
+    linie(g, [[195, 232], [195, 340], [209, 340]], ks, 3); linie(g, [[221, 340], [240, 340]], ks, 3); linie(g, [[285, 340], [285, 232]], ks, 3);
+    batterie(g, 215, 340);
+    kreis(g, 240, 340, 5, FA.ink); kreis(g, 285, 340, 5, FA.ink);
+    linie(g, zu ? [[240, 340], [285, 340]] : [[240, 340], [279, 316]], ks, 4);
+    text(g, "Steuerstromkreis", 150, 300, 15, zu ? "#8a5200" : FA.ink, "right", true); text(g, zu ? "kleiner Strom" : "kein Strom", 150, 322, 14, FA.mut, "right");
+    text(g, zu ? "Schalter geschlossen" : "Schalter offen", 300, 362, 14, FA.ink, "left");
+    /* Spule */
+    rechteck(g, 180, 200, 120, 32, FA.fe, FA.ink, 2);
+    for (var k = 0; k < 8; k++) linie(g, [[192 + k * 13, 194], [192 + k * 13, 238]], zu ? FA.strom : FA.cu, 4);
+    text(g, "Spule", 160, 216, 15, FA.ink, "right");
+    /* Arbeitsstromkreis */
+    linie(g, [[250, 170], [250, 60], [600, 60], [600, 158]], ka, anz ? 5 : 3);
+    linie(g, [[600, 202], [600, 300], [506, 300]], ka, anz ? 5 : 3);
+    linie(g, [[494, 300], [ax + 5, 300], [ax + 5, 260]], ka, anz ? 5 : 3);
+    batterie(g, 500, 300);
+    if (anz) { g.save(); g.globalAlpha = 0.9; kreis(g, 600, 180, 38, "#ffd54a"); g.restore(); }
+    kreis(g, 600, 180, 22, anz ? "#fff3b0" : "#fff", FA.ink, 2.5); linie(g, [[586, 166], [614, 194]], FA.ink, 2); linie(g, [[586, 194], [614, 166]], FA.ink, 2);
+    text(g, anz ? "Lampe leuchtet" : "Lampe aus", 556, 180, 15, FA.ink, "right");
+    text(g, "Arbeitsstromkreis", 425, 40, 15, anz ? "#8a5200" : FA.ink, "center", true); text(g, anz ? "großer Strom" : "kein Strom", 425, 80, 14, FA.mut);
+    /* Kontakt, Anker, Feder */
+    rechteck(g, 250, 163, 48, 14, "#c9a227", FA.ink, 2); g.fillStyle = "#c9a227"; g.beginPath(); g.moveTo(298, 163); g.lineTo(308, 170); g.lineTo(298, 177); g.closePath(); g.fill(); g.strokeStyle = FA.ink; g.lineWidth = 2; g.stroke();
+    text(g, "Kontakt", 240, 150, 15, FA.ink, "right");
+    rechteck(g, ax, 150, 10, 110, "#6f7c8a", FA.ink, 2); text(g, "Anker", ax + 20, 248, 15, FA.ink, "left");
+    var f = [], fx; for (fx = 0; fx <= 8; fx++) f.push([ax + 10 + fx * (430 - ax - 10) / 8, 200 + (fx % 2 ? -7 : 7)]);
+    linie(g, f, FA.ink, 2); rechteck(g, 430, 185, 10, 30, FA.fe, FA.ink, 2); text(g, "Feder", 452, 200, 15, FA.ink, "left");
+  };
   SIMS.schritte = function (host, p) {
     var cv = leinwand(host, 720, 380, p.titel), i = 0, n = p.schritte.length;
     var txt = simText(host), bar = leiste(host);
@@ -1725,6 +1931,85 @@ var SIMS = {};
         "Strom fließt " + (richt > 0 ? "auf dich zu" : "von dir weg") + ". " + (pol > 0 ? "Nordpol" : "Südpol") + " oben. Der Leiter schwingt nach " + (richt * pol > 0 ? "rechts (in den Magneten hinein)." : "links (aus dem Magneten heraus).");
       if (info.textContent !== s) info.textContent = s;
     });
+  };
+
+  /* =================================================================
+     Modul 3: Trainer zur Drei-Finger-Regel (rechte Hand, technische Stromrichtung)
+     Kraft = Strom x Feld. Blick wie bei der Leiterschaukel: Leiter im Querschnitt.
+     ================================================================= */
+  SIMS.dreifinger = function (host, p, api) {
+    var cv = leinwand(host, 720, 340, "Leiter im Magnetfeld. Gesucht ist die Richtung der Kraft."), g = cv.g;
+    var FELD = [[0, -1, "unten"], [0, 1, "oben"], [1, 0, "rechts"], [-1, 0, "links"]];      /* x nach rechts, y nach oben */
+    var frage = null, folge = 0, offen = true, alt = "";
+    var bar = leiste(host), ks = [];
+    ["links", "rechts", "oben", "unten"].forEach(function (r) { ks.push(knopf(bar, "nach " + r, function () { antworte(r); })); });
+    var bN = knopf(bar, api.T.trainerNaechste, neu, ""); bN.hidden = true;
+    function kraft() { var x = -frage.s * frage.b[1], y = frage.s * frage.b[0]; return x > 0 ? "rechts" : x < 0 ? "links" : y > 0 ? "oben" : "unten"; }
+    function neu() {
+      var k; do { frage = { s: Math.random() < 0.5 ? 1 : -1, b: FELD[Math.floor(Math.random() * 4)] }; k = frage.s + "," + frage.b[2]; } while (k === alt);
+      alt = k; offen = true; bN.hidden = true; ks.forEach(function (b) { b.disabled = false; }); zeichne();
+    }
+    function antworte(r) {
+      if (!offen) return; offen = false; ks.forEach(function (b) { b.disabled = true; }); bN.hidden = false;
+      var ok = r === kraft(), erkl = "Daumen (Strom): " + (frage.s > 0 ? "auf dich zu" : "von dir weg") + ". Zeigefinger (Magnetfeld): nach " + frage.b[2] + ". Mittelfinger (Kraft): nach " + kraft() + ".";
+      folge = ok ? folge + 1 : 0;
+      if (ok && folge >= 3) { api.melde(true, erkl + " " + api.T.trainerFertig); api.fertig(); } else api.melde(ok, erkl);
+      zeichne();
+    }
+    function zeichne() {
+      var bx = frage.b[0], by = frage.b[1], cx = 360, cy = 160, i;
+      leer(cv);
+      if (bx === 0) {                                                  /* Feld senkrecht: Pole oben und unten */
+        rechteck(g, 250, 20, 220, 44, by < 0 ? FA.N : FA.S, FA.ink, 2); text(g, by < 0 ? "N" : "S", 360, 43, 24, "#fff", "center", true);
+        rechteck(g, 250, 256, 220, 44, by < 0 ? FA.S : FA.N, FA.ink, 2); text(g, by < 0 ? "S" : "N", 360, 279, 24, "#fff", "center", true);
+        g.save(); g.globalAlpha = 0.55; for (i = 0; i < 4; i++) { var x = 280 + i * 53; if (Math.abs(x - cx) < 20) continue; linie(g, [[x, 68], [x, 252]], FA.feld, 2); spitze(g, x, 160, by < 0 ? Math.PI / 2 : -Math.PI / 2, FA.feld, 10); }
+        linie(g, [[cx - 28, 68], [cx - 28, 252]], FA.feld, 2); spitze(g, cx - 28, 110, by < 0 ? Math.PI / 2 : -Math.PI / 2, FA.feld, 10);
+        linie(g, [[cx + 28, 68], [cx + 28, 252]], FA.feld, 2); spitze(g, cx + 28, 110, by < 0 ? Math.PI / 2 : -Math.PI / 2, FA.feld, 10); g.restore();
+      } else {                                                         /* Feld waagrecht: Pole links und rechts */
+        rechteck(g, 190, 60, 44, 200, bx > 0 ? FA.N : FA.S, FA.ink, 2); text(g, bx > 0 ? "N" : "S", 212, 160, 24, "#fff", "center", true);
+        rechteck(g, 486, 60, 44, 200, bx > 0 ? FA.S : FA.N, FA.ink, 2); text(g, bx > 0 ? "S" : "N", 508, 160, 24, "#fff", "center", true);
+        g.save(); g.globalAlpha = 0.55; [90, 132, 188, 230].forEach(function (y) { linie(g, [[238, y], [482, y]], FA.feld, 2); spitze(g, 300, y, bx > 0 ? 0 : Math.PI, FA.feld, 10); }); g.restore();
+      }
+      querschnitt(g, cx, cy, 17, frage.s);
+      if (!offen) { var r = kraft(), dx = r === "rechts" ? 1 : r === "links" ? -1 : 0, dy = r === "unten" ? 1 : r === "oben" ? -1 : 0;
+        pfeil(g, cx + dx * 24, cy + dy * 24, cx + dx * 84, cy + dy * 84, FA.kraft, 5); text(g, "Kraft", cx + dx * 60 + (dx ? 0 : 34), cy + dy * 60 - (dx ? 20 : 0), 16, FA.kraft, "center", true); }
+      text(g, frage.s > 0 ? "Punkt: Strom fließt auf dich zu." : "Kreuz: Strom fließt von dir weg.", 20, 322, 15, FA.ink, "left");
+      text(g, api.T.trainerStand.replace("{a}", Math.min(3, folge)), 700, 322, 15, FA.ink, "right", true);
+      text(g, "Blaue Pfeile: Magnetfeld", 700, 20, 14, FA.feld, "right");
+    }
+    neu();
+  };
+
+  /* =================================================================
+     Modul 5: Amplitude und Periode am Spannungs-Zeit-Diagramm
+     ================================================================= */
+  SIMS.sinus = function (host) {
+    var cv = leinwand(host, 720, 350, "Spannungs-Zeit-Diagramm mit Amplitude und Periode"), g = cv.g, A = 6, T = 1;
+    var bar = leiste(host);
+    wahl(bar, "Amplitude", [2, 4, 6, 8], A, function (w) { return w + " V"; }, function (w) { A = w; zeichne(); });
+    wahl(bar, "Periode T", [0.5, 1, 2], T, function (w) { return zahl(w) + " s"; }, function (w) { T = w; zeichne(); });
+    var info = simText(host);
+    function zeichne() {
+      var x0 = 80, y0 = 160, px = 150, pv = 15, pts = [], x, k;
+      leer(cv);
+      for (k = -8; k <= 8; k += 2) { linie(g, [[x0 - 5, y0 - k * pv], [x0 + 610, y0 - k * pv]], k ? "#e6e9ed" : FA.mut, k ? 1 : 2); text(g, k + " V", x0 - 10, y0 - k * pv, 13, FA.mut, "right"); }
+      for (k = 0; k <= 4; k++) { linie(g, [[x0 + k * px, y0 - 125], [x0 + k * px, y0 + 125]], k ? "#e6e9ed" : FA.mut, k ? 1 : 2); text(g, k + " s", x0 + k * px, y0 + 140, 13, FA.mut); }
+      text(g, "Spannung", x0 + 8, 22, 14, FA.mut, "left"); text(g, "Zeit", x0 + 612, y0 - 14, 14, FA.mut, "right");
+      for (x = 0; x <= 600; x += 2) pts.push([x0 + x, y0 - A * pv * Math.sin(2 * Math.PI * (x / px) / T)]);
+      linie(g, pts, FA.feld, 3);
+      /* Amplitude: von der Nulllinie zum höchsten Punkt */
+      var xa = x0 + T / 4 * px;
+      pfeil(g, xa, y0, xa, y0 - A * pv + 3, FA.N, 3); g.font = "bold 15px " + SCHRIFT; var bw = g.measureText("Amplitude: " + A + " V").width; g.globalAlpha = 0.85; rechteck(g, xa + 6, y0 - A * pv / 2 - 11, bw + 8, 22, "#fff"); g.globalAlpha = 1;
+      text(g, "Amplitude: " + A + " V", xa + 10, y0 - A * pv / 2, 15, FA.N, "left", true);
+      /* Periode: Dauer einer vollständigen Schwingung */
+      var yp = y0 + 165, xb = x0 + T * px;
+      linie(g, [[x0, y0], [x0, yp + 8]], FA.kraft, 1.5, [4, 4]); linie(g, [[xb, y0], [xb, yp + 8]], FA.kraft, 1.5, [4, 4]);
+      pfeil(g, x0 + 12, yp, xb - 3, yp, FA.kraft, 3); pfeil(g, xb - 12, yp, x0 + 3, yp, FA.kraft, 3);
+      text(g, "Periode T = " + zahl(T) + " s", xb + 12, yp, 15, FA.kraft, "left", true);
+      info.textContent = "Der höchste Wert ist " + A + " V. Eine Schwingung dauert " + zahl(T) + " s. In einer Sekunde: " +
+        (T === 0.5 ? "2 Schwingungen. Frequenz: 2 Hz." : T === 1 ? "1 Schwingung. Frequenz: 1 Hz." : "eine halbe Schwingung. Frequenz: 0,5 Hz.");
+    }
+    zeichne();
   };
 
   /* =================================================================
@@ -1981,7 +2266,7 @@ var SIMS = {};
   function loesche(k) { delete mem[k]; try { window.localStorage.removeItem(k); } catch (e) {} }
 
   function alleMods(an) { var m = {}; C.module.forEach(function (x) { m[x.id] = !!an; }); return m; }
-  function stdE() { return { niveau: "R", mods: alleMods(false), frei: false }; }
+  function stdE() { return { niveau: "R", mods: alleMods(false), frei: false, bis: "" }; }
   function stdF() { return { ort: C.stationen[0].id, geloest: {}, station: {}, wert: {}, quiz: {}, selbst: {} }; }
   var E = stdE(), F = stdF();
   function sichern() { speichere(KEY_F, F); }
@@ -1989,9 +2274,10 @@ var SIMS = {};
   /* Link-Zusatz lesen: #r8, #m8, #r8-mod1-mod3, #m8-mod2aus, zusätzlich -frei */
   function leseHash() {
     var h = (window.location.hash || "").replace("#", "").toLowerCase(); if (!h) return null;
-    var e = { niveau: null, frei: false }, einzel = {}, treffer = false;
+    var e = { niveau: null, frei: false, bis: "" }, einzel = {}, treffer = false;
     h.split("-").forEach(function (p) {
-      var m = /^mod([1-7])(aus)?$/.exec(p);
+      var m = /^mod([1-7])(aus)?$/.exec(p), b = /^bis(\d+[ab]?)$/.exec(p);
+      if (b) C.stationen.forEach(function (st) { if (st.nr.toLowerCase() === b[1]) { e.bis = st.id; treffer = true; } });
       if (p === "m8") { e.niveau = "M"; treffer = true; }
       else if (p === "r8") { e.niveau = "R"; treffer = true; }
       else if (p === "frei") { e.frei = true; treffer = true; }
@@ -2006,7 +2292,7 @@ var SIMS = {};
   function hashCode() {
     var s = E.niveau === "M" ? "m8" : "r8";
     C.module.forEach(function (m) { if (E.niveau === "M" && !E.mods[m.id]) s += "-mod" + m.id + "aus"; if (E.niveau !== "M" && E.mods[m.id]) s += "-mod" + m.id; });
-    if (E.frei) s += "-frei";
+    if (E.frei) s += "-frei"; else if (E.bis) s += "-bis" + C.stationen[stIndex(E.bis)].nr.toLowerCase();
     return s;
   }
 
@@ -2080,7 +2366,7 @@ var SIMS = {};
     if (hatQuiz(st)) { z.b++; if (quizFertig()) z.bg++; }
     return z;
   }
-  function offen(i) { return E.frei || i === 0 || !!F.station[C.stationen[i - 1].id] || !!F.station[C.stationen[i].id]; }
+  function offen(i) { return E.frei || i === 0 || (E.bis && i <= stIndex(E.bis)) || !!F.station[C.stationen[i - 1].id] || !!F.station[C.stationen[i].id]; }
   function zeigeNav() {
     var nav = $("nav"), fertig = 0; nav.innerHTML = "";
     C.stationen.forEach(function (st, i) {
@@ -2188,7 +2474,7 @@ var SIMS = {};
     sec.appendChild(body);
     function fertig() { F.geloest[t.id] = 1; sichern(); status.hidden = false; sec.classList.add("fertig"); nachLoesen(); }
     if (F.geloest[t.id]) sec.classList.add("fertig");
-    ({ wahl: aufgWahl, vermutung: aufgVermutung, sortieren: aufgSortieren, schreiben: aufgSchreiben, zahl: aufgZahl })[t.art](t, body, fb, fertig);
+    ({ wahl: aufgWahl, vermutung: aufgVermutung, sortieren: aufgSortieren, schreiben: aufgSchreiben, zahl: aufgZahl, trainer: aufgTrainer })[t.art](t, body, fb, fertig);
     sec.appendChild(fb);
     if (t.hilfe && t.hilfe.length) sec.appendChild(baueHilfen(t.hilfe));
     return sec;
@@ -2224,6 +2510,11 @@ var SIMS = {};
     });
     body.appendChild(liste);
     if (F.geloest[t.id] && F.wert[t.id] != null) zeig(F.wert[t.id]);
+  }
+  /* Trainer: eine Simulation stellt Aufgaben und meldet, wenn das Ziel erreicht ist */
+  function aufgTrainer(t, body, fb, fertig) {
+    SIMS[t.sim](body, t, { fertig: function () { if (!F.geloest[t.id]) fertig(); }, melde: function (ok, text) { melde(fb, ok ? "ok" : "no", text); },
+      geloest: !!F.geloest[t.id], T: T });
   }
   function aufgZahl(t, body, fb, fertig) {
     var zeile = el("div", "zahlzeile"), inp = el("input"), b = knopf(T.pruefen, "", pruefe);
@@ -2322,7 +2613,7 @@ var SIMS = {};
     if (z.f) zeilen += "<tr><td>" + T.zFrei + "</td><td>" + z.fg + " " + T.von + " " + z.f + "</td></tr>";
     if (z.s) zeilen += "<tr><td>" + T.zStern + "</td><td>" + (z.s > 1 ? z.sg + " " + T.von + " " + z.s : z.sg ? T.ja : T.nein) + "</td></tr>";
     zeilen += "<tr><td>" + T.zVert + "</td><td>" + (z.v ? z.vg + " " + T.von + " " + z.v : T.keine) + "</td></tr>";
-    if (hatQuiz(st)) { var q = quizStand(false); zeilen += "<tr><td>" + T.zQuiz + "</td><td>" + q.r + " " + T.von + " " + q.n + "</td></tr>"; }
+    if (hatQuiz(st)) { var q = quizStand(false); zeilen += "<tr><td>" + T.zQuiz + "</td><td>" + q.r + " " + T.von + " " + q.n + "</td></tr>"; var qv = quizStand(true); if (qv.n) zeilen += "<tr><td>" + T.quizVert + "</td><td>" + qv.r + " " + T.von + " " + qv.n + "</td></tr>"; }
     main.innerHTML = "";
     var k = el("section", "karte geschafft",
       '<div class="haken" aria-hidden="true">✓</div><h2>' + T.geschafft + "</h2>" +
@@ -2427,12 +2718,20 @@ var SIMS = {};
     C.module.forEach(function (m) {
       var l = el("label", "schalter"), i = el("input"); i.type = "checkbox"; i.checked = !!E.mods[m.id];
       i.addEventListener("change", function () { E.mods[m.id] = i.checked; neu(); });
-      l.appendChild(i); l.appendChild(el("span", null, "Modul " + m.id + ": " + esc(m.name))); f2.appendChild(l);
+      l.appendChild(i); l.appendChild(el("span", null, "Modul " + m.id + ": " + esc(m.name) + ' <span class="tipp">(' + T.lkModulIn + " " + esc(m.st) + ")</span>")); f2.appendChild(l);
     });
     d.appendChild(f2);
     var f3 = el("fieldset"), l3 = el("label", "schalter"), i3 = el("input"); i3.type = "checkbox"; i3.checked = !!E.frei;
+    f3.appendChild(el("legend", null, T.lkStationen));
     i3.addEventListener("change", function () { E.frei = i3.checked; neu(); });
-    l3.appendChild(i3); l3.appendChild(el("span", null, T.lkFrei)); f3.appendChild(l3); d.appendChild(f3);
+    l3.appendChild(i3); l3.appendChild(el("span", null, T.lkFrei)); f3.appendChild(l3);
+    var lb = el("label", "wahl"), sel = el("select"); lb.appendChild(el("span", null, T.lkBis));
+    [{ id: "", nr: "", titel: T.lkBisKeine }].concat(C.stationen).forEach(function (st) {
+      var o = el("option"); o.value = st.id; o.textContent = st.id ? T.station + " " + st.nr + ": " + st.titel : st.titel; if ((E.bis || "") === st.id) o.selected = true; sel.appendChild(o);
+    });
+    sel.disabled = !!E.frei; sel.style.maxWidth = "100%";
+    sel.addEventListener("change", function () { E.bis = sel.value; neu(); });
+    lb.appendChild(sel); f3.appendChild(lb); d.appendChild(f3);
     var f4 = el("fieldset"), feld = el("input", "linkfeld"), ok = el("span", "tipp");
     f4.appendChild(el("legend", null, T.lkLink)); f4.appendChild(el("p", "tipp", T.lkLinkText));
     feld.type = "text"; feld.readOnly = true; feld.value = String(window.location.href).split("#")[0] + "#" + hashCode(); feld.setAttribute("aria-label", T.lkLink);
@@ -2449,7 +2748,7 @@ var SIMS = {};
   /* ---------------- Start ---------------- */
   function start() {
     var e = lade(KEY_E), f = lade(KEY_F), h = leseHash();
-    if (e && e.mods) { E.niveau = e.niveau === "M" ? "M" : "R"; E.frei = !!e.frei; C.module.forEach(function (m) { E.mods[m.id] = !!e.mods[m.id]; }); }
+    if (e && e.mods) { E.niveau = e.niveau === "M" ? "M" : "R"; E.frei = !!e.frei; E.bis = typeof e.bis === "string" ? e.bis : ""; C.module.forEach(function (m) { E.mods[m.id] = !!e.mods[m.id]; }); }
     if (h) { E = h; speichere(KEY_E, E); }                    /* Link-Zusatz hat Vorrang */
     if (f && f.geloest) { var s = stdF(); Object.keys(s).forEach(function (k) { if (f[k] != null) s[k] = f[k]; }); F = s; }
     document.title = C.titel; $("titel").textContent = C.titel;
